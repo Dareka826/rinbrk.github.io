@@ -7,3 +7,11 @@ body {
 
     font-size: 40px;
 }
+
+.header {
+    font-size: 1.2em;
+}
+
+.footer {
+    font-size: 0.8em;
+}
