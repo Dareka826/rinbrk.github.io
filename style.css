@@ -1,21 +1,23 @@
+html {
+    font-size: 18pt;
+}
+
 body {
     margin: 0px;
-    padding: 25px;
+    padding: 1rem;
 
     background-color: #222;
     color: #eee;
-
-    font-size: 30px;
 }
 
 .header {
-    font-size: 1.6em;
+    font-size: 1.6rem;
     text-align: right;
-    padding-right: 20px;
+    padding-right: 1rem;
 }
 
 .footer {
-    font-size: 0.4em;
+    font-size: 0.6rem;
     font-family: monospace;
     text-align: center;
 }
@@ -37,7 +39,7 @@ a:hover {
 
 div.title {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.15rem;
 }
 
 div.section {
