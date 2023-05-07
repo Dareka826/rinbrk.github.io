@@ -1,11 +1,13 @@
 #!/bin/sh
 
-m4 -I ./src ./src/page.m4.html ./src/index.m4.html >./index.html
+find ./src -type f | sort | while IFS= read -r SRC_FILE; do
+    DESTFILE=".${SRC_FILE#./src}"
+    DESTFILE="${DESTFILE%.m4.html}.html"
+    DESTDIR="${DESTFILE%/*}"
 
-[ -d ./blog ] || mkdir ./blog
-for POST in ./src/blog/*; do
-    FNAME="${POST##*/}"
-    FNAME="${FNAME%.m4.html}.html"
+    # Recreate directory structure
+    [ -d "${DESTDIR}" ] || mkdir -p "${DESTDIR}"
 
-    m4 -I ./src ./src/page.m4.html "${POST}" >./blog/"${FNAME}"
+    # Generate the page
+    m4 -I ./m4 ./m4/page.m4.html "${SRC_FILE}" >"${DESTFILE}"
 done
