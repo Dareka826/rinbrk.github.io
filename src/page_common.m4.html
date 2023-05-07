@@ -1,7 +1,10 @@
-changecom(`', `')dnl
-define(`BR', <br/>)dnl
-define(`NS', &nbsp;)dnl
-define(`SEPARATOR', <hr/>)dnl
+changequote(`[', `]')dnl
+changequote([```], ['''])dnl
+changecom(```''', ```''')dnl
 dnl
-define(`TITLE',   <div class="title"># $1</div>)dnl
-define(`SECTION', <div class="section">$1</div>)dnl
+define(```BR''', <br/>)dnl
+define(```NS''', &nbsp;)dnl
+define(```SEPARATOR''', <hr/>)dnl
+dnl
+define(```TITLE''',   <div class="title"># $1</div>)dnl
+define(```SECTION''', <div class="section">$1</div>)dnl
