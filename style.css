@@ -20,6 +20,7 @@ a:visited {
 }
 a {
     color: #ff6600;
+    text-decoration: none;
 }
 a:hover {
     color: #33efcf;
@@ -39,9 +40,22 @@ a:hover {
 }
 
 .header {
+    padding: 0px 1rem;
+    display: flex;
+    justify-content: space-between;
+
     font-size: 1.6rem;
-    text-align: right;
-    padding-right: 1rem;
+}
+
+.header-links {
+    flex-grow: 1;
+    align-self: flex-end;
+
+    display: flex;
+    font-size: 1rem;
+}
+.header-links a {
+    margin-right: 1rem;
 }
 
 .footer {
