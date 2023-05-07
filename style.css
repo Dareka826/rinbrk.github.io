@@ -37,11 +37,11 @@ a:hover {
     color: #33efcf;
 }
 
-div.title {
+.title {
     font-weight: bold;
     font-size: 1.15rem;
 }
 
-div.section {
+.section {
     font-weight: bold;
 }
