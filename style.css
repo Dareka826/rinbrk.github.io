@@ -45,3 +45,17 @@ a:hover {
 .section {
     font-weight: bold;
 }
+
+#content-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0px;
+}
+
+#content {
+    flex-grow: 1;
+    margin: 0px min(max(calc((100vw - 1000px) * 0.5), 0px), 15vw);
+    padding: 1rem;
+    background-color: #333;
+}
