@@ -25,6 +25,19 @@ a:hover {
     color: #33efcf;
 }
 
+.hide-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+.hide-link:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+.hide-link:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .header {
     font-size: 1.6rem;
     text-align: right;
