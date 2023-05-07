@@ -34,3 +34,11 @@ a {
 a:hover {
     color: #33efcf;
 }
+
+div.title {
+    text-decoration: bold;
+}
+
+div.section {
+    text-decoration: underline;
+}
