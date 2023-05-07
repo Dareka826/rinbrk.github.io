@@ -36,9 +36,10 @@ a:hover {
 }
 
 div.title {
-    text-decoration: bold;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
 div.section {
-    text-decoration: underline;
+    font-weight: bold;
 }
