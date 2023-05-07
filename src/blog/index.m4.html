@@ -10,7 +10,7 @@ PAGE(```Rin Brk - Blog Index''',
 TITLE(```Blog posts:''')
 
 GEN_LINKS(
-esyscmd(```find ./src/blog/ -type f -printf "%f\n" | grep -v "index.m4.html" | sort | sed "s/\.m4\.html$/,/"''')dnl
+    esyscmd(```find ./src/blog/ -type f -printf "%f\n" | grep -v "index.m4.html" | sort | sed "s/\.m4\.html$/,/"''')dnl
 )
 
 )dnl
