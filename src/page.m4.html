@@ -1,13 +1,16 @@
+include(`./page_common.m4.html')dnl
+dnl
+define(`PAGE',
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Rin Brk</title>
+        <title>$1</title>
         <meta charset="UTF-8">
         <link href="/style.css" rel="stylesheet">
     </head>
     <body>
-include(`./page_header.html')<br/>
-__CONTENT__<br/>
+include(`./page_header.html') BR
+$2 BR
 include(`./page_footer.html')
     </body>
-</html>
+</html>)dnl
