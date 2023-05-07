@@ -1,16 +1,17 @@
 define(```GEN_LINKS''',
     ```ifelse(eval(```$# <= 1'''), ```1''',
         ```ifelse($1, ```''', ```''', <a href="/blog/$1.html">$1</a>)''',
-        <a href="/blog/$1.html">substr($1, 9)</a> BR ```GEN_LINKS(shift($@))'''
+        <a href="/blog/$1.html">substr($1, 0, 4)-substr($1, 4, 2)-substr($1, 6, 2) substr($1, 9)</a> BR ```GEN_LINKS(shift($@))'''
     )'''
 )
 
 PAGE(```Rin Brk - Blog Index''',
 
-TITLE(```Blog posts:''')
+TITLE(```Posts:''')
+BR
 
 GEN_LINKS(
-    esyscmd(```find ./src/blog/ -type f -printf "%f\n" | grep -v "index.m4.html" | sort | sed "s/\.m4\.html$/,/"''')dnl
+    esyscmd(```find ./src/blog/ -type f -printf "%f\n" | grep -v "index.m4.html" | sort -r | sed "s/\.m4\.html$/,/"''')dnl
 )
 
 )dnl
