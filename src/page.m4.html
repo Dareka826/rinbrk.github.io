@@ -9,9 +9,11 @@ define(```PAGE''',
         <link href="/style.css" rel="stylesheet">
     </head>
     <body>
-        include(```./page_header.m4.html''') BR
-        <div id="content">
-            $2 BR
+        include(```./page_header.m4.html''')
+        <div id="content-wrapper">
+            <div id="content">
+                $2
+            </div>
         </div>
         include(```./page_footer.m4.html''')
     </body>
