@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Rin Brk - BD-R + par2</title>
+        <meta charset="UTF-8" />
+        <link href="/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-links">
+                <a href="/index.html">Home</a> <br />
+                <a href="/blog/index.html">Blog</a> <br />
+                <a href="/about.html">About</a> <br />
+                <a href="https://github.com/dareka826">Github</a> <br />
+            </div>
+            <a class="hide-link" href="/index.html">Rin Brk 🌸</a> <br />
+        </div>
+
+        <hr />
+
+        <div id="content-wrapper">
+            <div id="content">
+                <div class="title">## BD-R + par2 for RAID-like backup</div>
+                <br />
+
+                For a few months now, I've been searching for the best method to store some archives long-term (I have delayed making a robust backup way too many times). <br />
+                <br />
+
+                <div class="section"># Requirements</div>
+                I need a storage medium that can work after laying undisturbed for 10-20 years. At first I was looking into LTO tapes, but as a home user, it's just not worth the upfront cost of the reader/writer drive. HDDs are not really viable because
+                I'd need to remagnetize them once in a while. That's when I decided that optical is the way. <br />
+                <br />
+
+                <div class="section"># Which optical?</div>
+                Since my backups have to last a long time, organic optical media are out of the question. <br />
+                So, what's left? <br />
+                The discs which were deemed acceptable by me for backups are HTL BD-R and M-DISC. <br />
+                <br />
+                <div class="section"># HTL? What's that?</div>
+                HTL is a method of producing BD-R discs using inorganic dyes. The counterpart is LTH, which was actually developed later than HTL to repurpose CD and DVD making equipment and dyes to make BD-R media. The major downside of LTH media is
+                their shorter longevity. As far as I know the LTH method only exists for single layer BD-R media, so I'm pretty sure my dual layer 50GB BD-R discs are inorganic. <br />
+                <br />
+
+                <div class="section"># Well, okay... but what if the disks get scratched? HDDs don't get scratches!</div>
+                That's where <a href="https://parchive.github.io/">parchive</a> comes in! <br />
+                It's an amazing project that uses the Reed-Solomon coding to achieve things that almost sound like magic. <br />
+                One 1MB recovery block can recover a file that's been corrupted at most 1MB in any place! <br />
+                My inital plan was to generate 200-300% par2 redundancy for my source archives and burn that to discs, however there's a better way. <br />
+                par2 unfortunately cannot recover <b>any</b> data if there aren't enough recovery blocks. <br />
+                By filling the disks with only recovery blocks, if somehow (unlikely) there wasn't enough recovery data, I wouldn't get even a single byte of the original file back. <br />
+                <br />
+
+                <div class="section"># A bit on Reed-Solomon</div>
+                The Reed-Solomon codes are an amazing tool that is pretty easy to understand even with high-school level math. <br />
+                For every set of n values, you can find exactly one polynomial of degree n-1. <br />
+                Let's say we have 10 data points. We calculate a polynomial of degree 9 and we find points on it after the original 10 data points. Now we have more points than we started with, but they still give us the same polynomial. Now, as long as
+                we have at least 10 points (not necessairly the original data), we can recover the polynomial and with it, the original data points. <br />
+                That's more or less how parchive works. (Without most of the boring techical stuff) <br />
+                <br />
+
+                <div class="section"># So what's the better way?</div>
+                Since the original data is also part of the polynomial, we can just treat is as recovery data, but wihout the packet header information. <br />
+                What does this give us? <br />
+                If there isn't enough recovery data, you still have what's left of the original data, which can be pretty useful if you created the archive with a tool like <a href="http://dar.linux.free.fr/">dar</a> (what I use). You also don't have to
+                waste as much cpu time and power to calculate more recovery data than you need.<br />
+                <br />
+
+                <div class="section"># RAID-like redundancy with BD-Rs</div>
+                Let's say that the data I have fits on 4 disks. Now... what if any of them were defective, break or get lost? Thanks to par2 I can create 2 extra discs filled with recovery data and now any 4 of these 6 disks will give me the whole archive
+                back. <br />
+                Pretty amazing, right? <br />
+                But let's also say that the disks should be able to get damaged and still be recoverable. Let's choose an arbitrary number like 30%. Now the data size is larger by the par2 data, but everything else still holds! If we treat the
+                archive+par2 data as if it were the original data, we can apply the "RAID" principle to be able to recover from any n 30% damaged disks (out of n+bkp discs)! <br />
+                <br />
+
+                <div class="section"># par2 block size</div>
+                Since I use par2 to store data, not to send it over the internet, uniform file sizes make the most sense. par2 can only recover data in blocks, so the smaller the block size, the more types of data corruption it can recover. However the
+                more recovery blocks you generate, the more CPU time it takes and par2 has a limit of 32768 blocks. If you have n recovery blocks you can recover from at least n errors. <br />
+                IMO for critical data you should choose the smallest block size that still gives you under 32768 recovery blocks. <br />
+                <br />
+
+                <div class="section"># What I settled on</div>
+                My (possibly) final backup plan is the following: <br />
+                1. Get the amount of data to back up in bytes <br />
+                2. Multiply that by 100% + the wanted redundancy (eg 1.33 for 33% redundancy) <br />
+                3. Divide that by ~50GB to see how many BD-R DLs are needed <br />
+                4. Decide how many extra redundancy disks to make <br />
+                5. Split the archive with data onto however many disks you chose and fill the rest of the space with par2 recovery data <br />
+                <br />
+
+                <div class="section"># An example</div>
+                I have an archive file that's 121337484949 bytes. <br />
+                The 33% redundancy data will be about 121337484949 * 1.33 ~= 161378854983 bytes in size. <br />
+                That will be 3.23 BD-R DLs, so 4 disks. <br />
+                I want 3 extra disks, so the final disk count is 7. <br />
+                I split the archive into 7 parts. <br />
+                Using par2, I generate the redundancy data. <br />
+                Now I burn the disks. <br />
+                I have 7 disks, any 4 of which can give me my data back, even when they're 33% unreadable. <br />
+                <br />
+                Well, if you get a number like 3.23 disks, then the redundancy percent is actually much higher than 33%. It's kinda like 33% redundancy or better. <br />
+                <br />
+
+                <a href="/blog/index.html">Back to posts</a>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="footer">
+            &gt;:3 &nbsp;Rin 2023 &nbsp;UwU <br />
+            <br />
+            !!! This site is <a href="https://twitter.com/paxiti/status/1186336024999256064">under construction</a> !!!
+        </div>
+    </body>
+</html>
