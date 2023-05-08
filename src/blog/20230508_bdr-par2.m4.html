@@ -29,7 +29,7 @@ BR
 
 SECTION(```A bit on Reed-Solomon''')
 ```The Reed-Solomon codes are an amazing tool that is pretty easy to understand even with high-school level math.''' BR
-```For every set of n values, you can find exactly one polynomial of degree n-1.''' BR
+```For every set of CODE_SPAN(n) values, you can find exactly one polynomial of degree CODE_SPAN(n-1).''' BR
 ```Let's say we have 10 data points. We calculate a polynomial of degree 9 and we find points on it after the original 10 data points. Now we have more points than we started with, but they still give us the same polynomial. Now, as long as we have at least 10 points (not necessairly the original data), we can recover the polynomial and with it, the original data points.''' BR
 ```That's more or less how parchive works. (Without most of the boring techical stuff)''' BR
 BR
@@ -61,8 +61,8 @@ SECTION(```What I settled on''')
 BR
 
 SECTION(```An example''')
-```I have an archive file that's 121337484949 bytes.''' BR
-```The 33% redundancy data will be about 121337484949 * 1.33 ~= 161378854983 bytes in size.''' BR
+```I have an archive file that's CODE_SPAN(121337484949) bytes.''' BR
+```The 33% redundancy data will be about CODE_SPAN(121337484949 * 1.33 ~= 161378854983 bytes).''' BR
 ```That will be 3.23 BD-R DLs, so 4 disks.''' BR
 ```I want 3 extra disks, so the final disk count is 7.''' BR
 ```I split the archive into 7 parts.''' BR
@@ -71,6 +71,10 @@ SECTION(```An example''')
 ```I have 7 disks, any 4 of which can give me my data back, even when they're 33% unreadable.''' BR
 BR
 ```Well, if you get a number like 3.23 disks, then the redundancy percent is actually much higher than 33%. It's kinda like 33% redundancy or better.''' BR
+```You can calculate the final redundancy using this formula:'''
+CODE_DIV( (num_discs * DISC_SIZE / data_size - 1) * 100 )
+```Here it would be:'''
+CODE_DIV((4 * 50000000000 / 121337484949 - 1) * 100 = ~64.83)
 BR
 
 ```REFS_TEXT''' BR

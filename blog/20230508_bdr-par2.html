@@ -56,7 +56,7 @@
 
                 <div class="section"># A bit on Reed-Solomon</div>
                 The Reed-Solomon codes are an amazing tool that is pretty easy to understand even with high-school level math. <br />
-                For every set of n values, you can find exactly one polynomial of degree n-1. <br />
+                For every set of <span class="code">n</span> values, you can find exactly one polynomial of degree <span class="code">n-1</span>. <br />
                 Let's say we have 10 data points. We calculate a polynomial of degree 9 and we find points on it after the original 10 data points. Now we have more points than we started with, but they still give us the same polynomial. Now, as long as
                 we have at least 10 points (not necessairly the original data), we can recover the polynomial and with it, the original data points. <br />
                 That's more or less how parchive works. (Without most of the boring techical stuff) <br />
@@ -94,8 +94,8 @@
                 <br />
 
                 <div class="section"># An example</div>
-                I have an archive file that's 121337484949 bytes. <br />
-                The 33% redundancy data will be about 121337484949 * 1.33 ~= 161378854983 bytes in size. <br />
+                I have an archive file that's <span class="code">121337484949</span> bytes. <br />
+                The 33% redundancy data will be about <span class="code">121337484949 * 1.33 ~= 161378854983 bytes</span>. <br />
                 That will be 3.23 BD-R DLs, so 4 disks. <br />
                 I want 3 extra disks, so the final disk count is 7. <br />
                 I split the archive into 7 parts. <br />
@@ -104,6 +104,10 @@
                 I have 7 disks, any 4 of which can give me my data back, even when they're 33% unreadable. <br />
                 <br />
                 Well, if you get a number like 3.23 disks, then the redundancy percent is actually much higher than 33%. It's kinda like 33% redundancy or better. <br />
+                You can calculate the final redundancy using this formula:
+                <div class="code-flex"><div class="code">(num_discs * DISC_SIZE / data_size - 1) * 100</div></div>
+                Here it would be:
+                <div class="code-flex"><div class="code">(4 * 50000000000 / 121337484949 - 1) * 100 = ~64.83</div></div>
                 <br />
 
                 References: <br />
