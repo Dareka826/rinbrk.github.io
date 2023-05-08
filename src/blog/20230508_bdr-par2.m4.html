@@ -15,11 +15,11 @@ SECTION(```Which optical?''')
 ```The discs which were deemed acceptable by me for backups are HTL BD-R and M-DISC.''' BR
 BR
 SECTION(```HTL? What's that?''')
-```HTL is a method of producing BD-R discs using inorganic dyes. The counterpart is LTH, which was actually developed later than HTL to repurpose CD and DVD making equipment and dyes to make BD-R media. The major downside of LTH media is their shorter longevity. As far as I know the LTH method only exists for single layer BD-R media, so I'm pretty sure my dual layer 50GB BD-R discs are inorganic.''' BR
+```HTL is a method of producing BD-R discs using inorganic dyes. The counterpart is LTH, which was actually developed later than HTL to repurpose CD and DVD making equipment and dyes to make BD-R media. The major downside of LTH media is their shorter longevity. As far as I know the LTH method only exists for single layer BD-R media REF(https://blu-raydisc.info/licensee-list/discmanuid-licenseelist.php), so I'm pretty sure my dual layer 50GB BD-R discs are inorganic.''' BR
 BR
 
 SECTION(```Well, okay... but what if the disks get scratched? HDDs don't get scratches!''')
-```That's where <a href="https://parchive.github.io/">parchive</a> comes in!''' BR
+```That's where parchive REF(https://parchive.github.io/) comes in!''' BR
 ```It's an amazing project that uses the Reed-Solomon coding to achieve things that almost sound like magic.''' BR
 ```One 1MB recovery block can recover a file that's been corrupted at most 1MB in any place!''' BR
 ```My inital plan was to generate 200-300% par2 redundancy for my source archives and burn that to discs, however there's a better way.''' BR
@@ -37,7 +37,7 @@ BR
 SECTION(```So what's the better way?''')
 ```Since the original data is also part of the polynomial, we can just treat is as recovery data, but wihout the packet header information.''' BR
 ```What does this give us?''' BR
-```If there isn't enough recovery data, you still have what's left of the original data, which can be pretty useful if you created the archive with a tool like <a href="http://dar.linux.free.fr/">dar</a> (what I use). You also don't have to waste as much cpu time and power to calculate more recovery data than you need.'''BR
+```If there isn't enough recovery data, you still have what's left of the original data, which can be pretty useful if you created the archive with a tool like dar REF(http://dar.linux.free.fr/) (what I use). You also don't have to waste as much cpu time and power to calculate more recovery data than you need.'''BR
 BR
 
 SECTION(```RAID-like redundancy with BD-Rs''')
@@ -71,6 +71,9 @@ SECTION(```An example''')
 ```I have 7 disks, any 4 of which can give me my data back, even when they're 33% unreadable.''' BR
 BR
 ```Well, if you get a number like 3.23 disks, then the redundancy percent is actually much higher than 33%. It's kinda like 33% redundancy or better.''' BR
+BR
+
+```REFS_TEXT''' BR
 BR
 
 <a href="/blog/index.html">Back to posts</a>
