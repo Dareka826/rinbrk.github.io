@@ -74,6 +74,16 @@ a:hover {
     font-weight: bold;
 }
 
+.code {
+    background-color: #111;
+    color: #eee;
+    font-family: monospace;
+    padding: 0px 0.2rem;
+}
+.code-flex {
+    display: flex;
+}
+
 #content-wrapper {
     display: flex;
     justify-content: center;
