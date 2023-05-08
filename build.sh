@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -r ./blog ./*.html
+
 find ./src -type f | sort | while IFS= read -r SRC_FILE; do
     DESTFILE=".${SRC_FILE#./src}"
     DESTFILE="${DESTFILE%.m4.html}.html"
