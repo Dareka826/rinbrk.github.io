@@ -9,5 +9,12 @@ find ./src -type f | sort | while IFS= read -r SRC_FILE; do
     [ -d "${DESTDIR}" ] || mkdir -p "${DESTDIR}"
 
     # Generate the page
-    m4 -I ./m4 ./m4/page.m4.html "${SRC_FILE}" >"${DESTFILE}"
+    timeout 10s \
+        m4 --nesting-limit=50 -I ./m4 ./m4/page.m4.html "${SRC_FILE}" >"${DESTFILE}"
+
+    command -v prettier >/dev/null 2>&1 && {
+        prettier --tab-width 4 --print-width 255 "${DESTFILE}" >"${DESTFILE}_prettier" && \
+            cp "${DESTFILE}_prettier" "${DESTFILE}"
+        rm "${DESTFILE}_prettier"
+    }
 done
