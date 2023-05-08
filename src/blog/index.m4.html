@@ -1,3 +1,5 @@
+dnl vim:ft=m4
+
 define(```GEN_LINKS''',
     ```ifelse(eval(```$# <= 1'''), ```1''',
         ```ifelse($1, ```''', ```''', <a href="/blog/$1.html">$1</a>)''',
