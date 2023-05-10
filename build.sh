@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm -r ./blog ./*.html
+rm -r ./blog ./*.html >/dev/null 2>&1 || :
 
 find ./src -type f | sort | while IFS= read -r SRC_FILE; do
     DESTFILE=".${SRC_FILE#./src}"
