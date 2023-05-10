@@ -1,5 +1,5 @@
-dnl vim:ft=m4
-include(`./page_common.m4.html')
+dnl vim:ft=html
+include(`./common.m4')
 
 define(```PAGE''', ```
 <!DOCTYPE html>
