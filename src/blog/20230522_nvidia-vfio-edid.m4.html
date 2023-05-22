@@ -1,0 +1,35 @@
+dnl vim:ft=m4
+PAGE(```Rin Brk - NVIDIA VFIO EDID''', ```
+
+TITLE(```NVIDIA VFIO EDID Shenanignas''') BR
+
+
+SECTION(```The problem''')
+For a few days now, I've been setting up VMs for gmaing with PCI passthrough on my laptop. BR
+They worked just fine with my monitor plugged in, but if I powered on the VM with a HDMI dummy plug in the card, it just stopped working. BR
+Even if I plugged my monitor in, if the card had the plug during boot, it just didn't work. BR
+If, however I booted the VM first, then once fully powered, plugged in the dummy plug, it worked just fine. BR
+BR
+
+SECTION(```What does such a plug even do?''')
+So, to figure out where the problem lies, I started by looking up what an HDMI dumym plug even does. BR
+Apparently it fakes a monitor output by providing the card with EDID (Extended Display Identification Data). It's a protocol that allows the monitor to tell the output device what resoultions, framerates and other stuff it supports. BR
+BR
+
+SECTION(```The solution''')
+Using the i2c interface of the GPU, I read the EDID information of my real monitor and then wrote it to the dummy plug. BR
+Yes, that's it. The card now boots up just fine. BR
+BR
+
+SECTION(```How to do it''')
+I wouldn't really recommend overwriting any EDID data, if you're not sure it's needed. BR
+With that out of the way, the procedure is quite simple really. All you need is i2c-tools. BR
+First you need to find out which i2c bus is the card, then you read/write to the 0x50 chip REF(```https://wiki.debian.org/RepairEDID''') REF(```https://translate.google.com/translate?hl=&sl=de&tl=en&u=https%3A%2F%2Fthinkwiki.de%2FDisplay-EDID_ver%25C3%25A4ndern'''). BR
+I wrote a tool to automate the reading/writing part, but I don't guarantee it's 100% safe. BR
+BR
+
+SECTION(```Possible causes''')
+The only possibility I have thought up is that the NVIDIA GPU check for something during the hardware initialization and either blacklists certain stuff or just crashes when it recieves information it didn't expect. BR
+BR
+
+''')
